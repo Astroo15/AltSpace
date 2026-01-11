@@ -48,3 +48,12 @@ onAuthStateChanged(auth, (user) => {
     window.location.href = "home.html";
   }
 });
+
+    import { signOut } from 
+"https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+window.logout = function () {
+  signOut(auth).then(() => {
+    window.location.href = "index.html";
+  });
+};

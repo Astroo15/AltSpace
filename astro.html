@@ -1,222 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Astro – AltSpace</title>
 
 <style>
 body {
-  background: black url("https://i.imgur.com/0Z8FQYF.gif");
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-}
-
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-}
-
-.header {
-  border: 3px dashed hotpink;
-  padding: 15px;
-  text-align: center;
-  background: black;
-}
-
-.header h1 {
-  margin: 0;
-  color: cyan;
-}
-
-.tabs {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 15px;
-}
-
-.tabs button {
-  background: black;
-  border: 2px dashed cyan;
-  color: hotpink;
-  padding: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.tabs button:hover {
-  background: hotpink;
-  color: black;
+  background:black url("https://i.imgur.com/0Z8FQYF.gif");
+  color:white;
+  font-family:Arial;
 }
 
 .box {
-  border: 2px dashed hotpink;
-  background: black;
-  padding: 15px;
-  margin-top: 20px;
+  border:2px dashed hotpink;
+  background:black;
+  padding:20px;
+  max-width:800px;
+  margin:30px auto;
 }
 
-.label {
-  color: cyan;
-  font-weight: bold;
+h1 { color:cyan; }
+button {
+  background:hotpink;
+  border:none;
+  padding:8px;
+  font-weight:bold;
 }
-
-.blog-post {
-  border-top: 1px dashed cyan;
-  margin-top: 10px;
-  padding-top: 10px;
-}
-
 input, textarea {
-  width: 95%;
-  background: black;
-  color: white;
-  border: 1px solid cyan;
-  padding: 5px;
+  width:95%;
+  background:black;
+  color:white;
+  border:1px solid cyan;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="box">
+  <h1 id="username">Astro 🕸️</h1>
+  <p id="email">loading...</p>
 
-  <div class="header">
-    <h1 id="username">Astro 🕸️</h1>
-    <p id="userEmail">not logged in</p>
-  </div>
+  <p><b>Bio:</b> <span id="bio">internet kid energy</span></p>
 
-  <div class="tabs">
-    <button onclick="showTab('about')">About</button>
-    <button onclick="showTab('blog')">Blog</button>
-    <button onclick="showTab('customize')">Customize</button>
-  </div>
+  <button onclick="showEditor()">Customize</button>
 
-  <div class="box tab" id="about">
-    <p><span class="label">Aesthetic:</span> scene / alt / chaos</p>
-    <p><span class="label">Bio:</span> <span id="bio">internet kid energy</span></p>
-  </div>
-
-  <div class="box tab" id="blog" style="display:none;">
-    <h3>Blog</h3>
-
-    <textarea id="postInput" placeholder="write something chaotic"></textarea>
-    <br><br>
-    <button onclick="postBlog()">Post</button>
-
-    <div id="posts"></div>
-  </div>
-
-  <div class="box tab" id="customize" style="display:none;">
-    <h3>Edit Profile</h3>
-
-    <label>Bio</label><br>
+  <div id="editor" style="display:none;">
     <textarea id="bioInput"></textarea><br><br>
-
-    <label>Name Color</label><br>
     <input type="color" id="colorInput"><br><br>
-
     <button onclick="saveProfile()">Save</button>
   </div>
-
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  getDoc,
-  collection,
-  addDoc,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDNLeNACWjr0dr41g_utjpVBdGUpTwCJdg",
   authDomain: "altspace-25aed.firebaseapp.com",
-  projectId: "altspace-25aed",
-  storageBucket: "altspace-25aed.firebasestorage.app",
-  messagingSenderId: "671097190540",
-  appId: "1:671097190540:web:5cb724024e1ffd41d963a9"
+  projectId: "altspace-25aed"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-window.showTab = function(tab) {
-  document.querySelectorAll(".tab").forEach(t => t.style.display = "none");
-  document.getElementById(tab).style.display = "block";
-};
+window.showEditor = () =>
+  editor.style.display = "block";
 
-window.saveProfile = async function () {
-  const bio = document.getElementById("bioInput").value;
-  const color = document.getElementById("colorInput").value;
+window.saveProfile = async () => {
   const user = auth.currentUser;
-
-  if (!user) {
-    alert("Log in first");
-    return;
-  }
-
   await setDoc(doc(db, "profiles", user.uid), {
-    bio,
-    color
+    bio: bioInput.value,
+    color: colorInput.value
   });
 
-  if (bio) document.getElementById("bio").innerText = bio;
-  if (color) document.getElementById("username").style.color = color;
-
-  alert("Profile saved 🖤");
+  bio.innerText = bioInput.value;
+  username.style.color = colorInput.value;
 };
-
-window.postBlog = async function () {
-  const text = document.getElementById("postInput").value;
-  const user = auth.currentUser;
-  if (!user || !text) return;
-
-  await addDoc(collection(db, "posts"), {
-    uid: user.uid,
-    text,
-    createdAt: Date.now()
-  });
-
-  document.getElementById("postInput").value = "";
-  loadPosts();
-};
-
-async function loadPosts() {
-  const postsDiv = document.getElementById("posts");
-  postsDiv.innerHTML = "";
-
-  const snap = await getDocs(collection(db, "posts"));
-  snap.forEach(docSnap => {
-    const p = document.createElement("div");
-    p.className = "blog-post";
-    p.innerText = docSnap.data().text;
-    postsDiv.appendChild(p);
-  });
-}
 
 onAuthStateChanged(auth, async user => {
-  if (user) {
-    document.getElementById("userEmail").innerText = user.email;
+  if (!user) return location.href="index.html";
+  email.innerText = user.email;
 
-    const snap = await getDoc(doc(db, "profiles", user.uid));
-    if (snap.exists()) {
-      const data = snap.data();
-      if (data.bio) document.getElementById("bio").innerText = data.bio;
-      if (data.color) document.getElementById("username").style.color = data.color;
-    }
-
-    loadPosts();
+  const snap = await getDoc(doc(db, "profiles", user.uid));
+  if (snap.exists()) {
+    bio.innerText = snap.data().bio;
+    username.style.color = snap.data().color;
   }
 });
 </script>
-
 </body>
 </html>

@@ -26,14 +26,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Auth state listener
 onAuthStateChanged(auth, (user) => {
   console.log("auth state changed:", user);
 
-  if (user) {
+  if (user && !window.location.pathname.includes("home.html")) {
     console.log("redirecting to home.html");
-    if (!window.location.pathname.endsWith("home.html")) {
-      window.location.href = "home.html";
+    window.location.href = "/AltSpace/home.html";
+  }
+});
+
     }
   }
 });
@@ -41,7 +42,10 @@ onAuthStateChanged(auth, (user) => {
 // Logout function
 window.logout = function () {
   signOut(auth).then(() => {
-    window.location.href = "index.html";
+    window.location.href = "/AltSpace/index.html";
+  });
+};
+
   });
 };
 

@@ -38,3 +38,13 @@ window.login = function () {
     location.href = "astro.html";
   }).catch(e => alert(e.message));
 };
+import { getAuth, onAuthStateChanged } from 
+"https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    window.location.href = "home.html";
+  }
+});

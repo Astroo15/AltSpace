@@ -1,136 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Astro – AltSpace</title>
+<meta charset="UTF-8">
+<title>Astro – AltSpace</title>
 
-  <style>
-    body {
-      background: electric blue;
-      color: black;
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-    }
+<style>
+body {
+  background: black url("https://i.imgur.com/0Z8FQYF.gif");
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
 
-    .profile {
-      border: 2px dashed hotpink;
-      padding: 20px;
-      max-width: 750px;
-      margin: 40px auto;
-      background: #000;
-    }
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
 
-    h1 {
-      color: cyan;
-      margin-bottom: 5px;
-    }
+/* HEADER */
+.header {
+  border: 3px dashed hotpink;
+  padding: 15px;
+  text-align: center;
+  background: #000;
+}
 
-    .label {
-      color: hotpink;
-      font-weight: bold;
-    }
+.header h1 {
+  color: cyan;
+  margin: 0;
+}
 
-    button {
-      background: hotpink;
-      border: none;
-      padding: 8px 12px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-    }
+/* TABS */
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
 
-    button:hover {
-      background: cyan;
-    }
+.tabs button {
+  background: black;
+  border: 2px dashed cyan;
+  color: hotpink;
+  padding: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-    input {
-      width: 90%;
-      padding: 6px;
-      margin-top: 5px;
-      background: black;
-      border: 1px solid cyan;
-      color: white;
-    }
+.tabs button:hover {
+  background: hotpink;
+  color: black;
+}
 
-    .editor {
-      display: none;
-      border-top: 2px dashed cyan;
-      margin-top: 20px;
-      padding-top: 15px;
-    }
-  </style>
+/* BOXES */
+.box {
+  border: 2px dashed hotpink;
+  background: #000;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.label {
+  color: cyan;
+  font-weight: bold;
+}
+
+/* BLOG */
+.blog-post {
+  border-top: 1px dashed cyan;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+/* EDITOR */
+input, textarea {
+  width: 95%;
+  background: black;
+  color: white;
+  border: 1px solid cyan;
+  padding: 5px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="profile">
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
     <h1 id="username">Astro 🕸️</h1>
-
-    <p>
-      <span class="label">Aesthetic:</span>
-      scene / alt / chaos
-    </p>
-
-    <p>
-      <span class="label">Bio:</span>
-      <span id="bio">
-        loud colors, honest feelings, internet kid energy
-      </span>
-    </p>
-
-    <button onclick="toggleEditor()">Customize Profile</button>
-
-    <div class="editor" id="editor">
-      <h3>Edit Profile</h3>
-
-      <label>New Bio</label><br>
-      <input id="bioInput" placeholder="type your new bio">
-
-      <br><br>
-
-      <label>Name Color</label><br>
-      <input id="colorInput" type="color">
-
-      <br><br>
-
-      <button onclick="saveProfile()">Save Changes</button>
-    </div>
+    <p id="userEmail">not logged in</p>
   </div>
 
-  <script>
-    function toggleEditor() {
-      document.getElementById("editor").style.display = "block";
-    }
+  <!-- TABS -->
+  <div class="tabs">
+    <button onclick="showTab('about')">About</button>
+    <button onclick="showTab('blog')">Blog</button>
+    <button onclick="showTab('customize')">Customize</button>
+  </div>
 
-    function saveProfile() {
-      const bio = document.getElementById("bioInput").value;
-      const color = document.getElementById("colorInput").value;
+  <!-- ABOUT -->
+  <div class="box tab" id="about">
+    <p><span class="label">Aesthetic:</span> scene / alt / chaos</p>
+    <p><span class="label">Bio:</span> <span id="bio">internet kid energy</span></p>
+  </div>
 
-      if (bio) {
-        document.getElementById("bio").innerText = bio;
-        localStorage.setItem("astro_bio", bio);
-      }
+  <!-- BLOG -->
+  <div class="box tab" id="blog" style="display:none;">
+    <h3>Blog</h3>
+    <div class="blog-post">
+      <p><b>First post</b></p>
+      <p>AltSpace is alive 🖤</p>
+    </div>
+    <p style="font-size:12px;color:#aaa;">
+      posting unlocked soon
+    </p>
+  </div>
 
-      if (color) {
-        document.getElementById("username").style.color = color;
-        localStorage.setItem("astro_color", color);
-      }
+  <!-- CUSTOMIZE -->
+  <div class="box tab" id="customize" style="display:none;">
+    <h3>Edit Profile</h3>
 
-      alert("Profile saved 🖤");
-    }
+    <label>Bio</label><br>
+    <textarea id="bioInput"></textarea><br><br>
 
-    // Load saved data
-    const savedBio = localStorage.getItem("astro_bio");
-    const savedColor = localStorage.getItem("astro_color");
+    <label>Name Color</label><br>
+    <input type="color" id="colorInput"><br><br>
 
-    if (savedBio) {
-      document.getElementById("bio").innerText = savedBio;
-    }
+    <button onclick="saveProfile()">Save</button>
+  </div>
 
-    if (savedColor) {
-      document.getElementById("username").style.color = savedColor;
-    }
-  </script>
+</div>
+
+<!-- FIREBASE + LOGIC -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDNLeNACWjr0dr41g_utjpVBdGUpTwCJdg",
+  authDomain: "altspace-25aed.firebaseapp.com",
+  projectId: "altspace-25aed",
+  storageBucket: "altspace-25aed.firebasestorage.app",
+  messagingSenderId: "671097190540",
+  appId: "1:671097190540:web:5cb724024e1ffd41d963a9"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+/* AUTH STATE */
+onAuthStateChanged(auth, user => {
+  if (user) {
+    document.getElementById("userEmail").innerText = user.email;
+  } else {
+    document.getElementById("userEmail").innerText = "not logged in";
+  }
+});
+
+/* TABS */
+window.showTab = function(tab) {
+  document.querySelectorAll(".tab").forEach(t => t.style.display = "none");
+  document.getElementById(tab).style.display = "block";
+};
+
+/* SAVE PROFILE (LOCAL FOR NOW) */
+window.saveProfile = function() {
+  const bio = document.getElementById("bioInput").value;
+  const color = document.getElementById("colorInput").value;
+
+  if (bio) {
+    document.getElementById("bio").innerText = bio;
+    localStorage.setItem("astro_bio", bio);
+  }
+
+  if (color) {
+    document.getElementById("username").style.color = color;
+    localStorage.setItem("astro_color", color);
+  }
+
+  alert("Saved 🖤");
+};
+
+/* LOAD SAVED */
+const savedBio = localStorage.getItem("astro_bio");
+const savedColor = localStorage.getItem("astro_color");
+
+if (savedBio) document.getElementById("bio").innerText = savedBio;
+if (savedColor) document.getElementById("username").style.color = savedColor;
+</script>
 
 </body>
 </html>

@@ -1,193 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Astro ✦ Profile</title>
+  <meta charset="UTF-8">
+  <title>Astro – AltSpace</title>
 
   <style>
-    body { <marquee>★ SCENE NEVER DIES ★ ALTSPACE ONLINE ★</marquee>
-
-  background: black;
-  color: #00F0FF;
-  font-family: "Trebuchet MS", Arial, sans-serif;
-      marquee { color: hotpink; font-weight: bold; }
-          <img src="https://media.tenor.com/Z6gmDPeM6dgAAAAC/glitter.gif"
-style="position:fixed; bottom:10px; right:10px; width:100px;">
-<button onclick="alert('Profile editor coming soon 🖤')">
-  Customize Profile
-</button>
-          <div id="editor" style="display:none;">
-  <h3>Edit Profile</h3>
-
-  <input id="newBio" placeholder="New bio">
-  <br><br>
-  <button onclick="saveProfile()">Save</button>
-</div>
-
-<script>
-  const btn = document.querySelector("button");
-  const editor = document.getElementById("editor");
-
-  btn.onclick = () => {
-    editor.style.display = "block";
-  };
-
-  function saveProfile() {
-    alert("Saving later 😈");
-  }
-</script>
-
-
-
-}
-<img class="sticker" src="https://media.tenor.com/Z6gmDPeM6dgAAAAC/glitter.gif" width="120">
-
+    body {
+      background: black;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
     }
 
-    a {
-      color: hotpink;
-      text-decoration: none;
-    }
-
-    .page {
-      width: 900px;
-      margin: auto;
-      border: 3px solid cyan;
-      background: #0b0b0b;
-    }
-
-    .header {
-      text-align: center;
-      font-size: 36px;
-      color: hotpink;
-      padding: 15px;
-      border-bottom: 2px dashed hotpink;
-    }
-
-    .content {
-      display: flex;
-    }
-
-    .sidebar {
-      width: 250px;
-      padding: 10px;
-      border-right: 2px dashed cyan;
-      background: #111;
-    }
-
-    .profile-pic {
-      width: 100%;
-      border: 2px solid hotpink;
-      margin-bottom: 10px;
-      text-align: center;
+    .profile {
+      border: 2px dashed hotpink;
       padding: 20px;
-      background: black;
+      max-width: 750px;
+      margin: 40px auto;
+      background: #000;
     }
 
-    .box {
-      border: 2px solid cyan;
-      padding: 8px;
-      margin-bottom: 10px;
-      background: black;
-    }
-
-    .box-title {
-      color: hotpink;
-      font-weight: bold;
+    h1 {
+      color: cyan;
       margin-bottom: 5px;
     }
 
-    .main {
-      flex: 1;
-      padding: 10px;
+    .label {
+      color: hotpink;
+      font-weight: bold;
     }
 
-    .comment {
-      border-bottom: 1px dashed #555;
-      padding: 5px 0;
-      font-size: 14px;
+    button {
+      background: hotpink;
+      border: none;
+      padding: 8px 12px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
     }
 
-    .blink {
-      animation: blink 1s infinite;
+    button:hover {
+      background: cyan;
     }
 
-    @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0; }
-      100% { opacity: 1; }
+    input {
+      width: 90%;
+      padding: 6px;
+      margin-top: 5px;
+      background: black;
+      border: 1px solid cyan;
+      color: white;
+    }
+
+    .editor {
+      display: none;
+      border-top: 2px dashed cyan;
+      margin-top: 20px;
+      padding-top: 15px;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="page">
+  <div class="profile">
+    <h1 id="username">Astro 🕸️</h1>
 
-    <div class="header">
-      ★ Astro ★
-    </div>
+    <p>
+      <span class="label">Aesthetic:</span>
+      scene / alt / chaos
+    </p>
 
-    <div class="content">
+    <p>
+      <span class="label">Bio:</span>
+      <span id="bio">
+        loud colors, honest feelings, internet kid energy
+      </span>
+    </p>
 
-      <!-- SIDEBAR -->
-      <div class="sidebar">
+    <button onclick="toggleEditor()">Customize Profile</button>
 
-        <div class="profile-pic">
-          PROFILE PIC<br>
-          (add image later)
-        </div>
+    <div class="editor" id="editor">
+      <h3>Edit Profile</h3>
 
-        <div class="box">
-          <div class="box-title">Status</div>
-          online • scene forever
-        </div>
+      <label>New Bio</label><br>
+      <input id="bioInput" placeholder="type your new bio">
 
-        <div class="box">
-          <div class="box-title">Links</div>
-          <a href="index.html">Home</a><br>
-          <a href="#">Blog</a><br>
-          <a href="#">Friends</a>
-        </div>
+      <br><br>
 
-      </div>
+      <label>Name Color</label><br>
+      <input id="colorInput" type="color">
 
-      <!-- MAIN PROFILE -->
-      <div class="main">
+      <br><br>
 
-        <div class="box">
-          <div class="box-title">About Me</div>
-          androgynous chaos.<br>
-          scene kid energy.<br>
-          internet raised.<br>
-          <span class="blink">don’t blink.</span>
-        </div>
-
-        <div class="box">
-          <div class="box-title">Interests</div>
-          music ★ fashion ★ coding ★ neon colors ★
-        </div>
-
-        <div class="box">
-          <div class="box-title">Comments</div>
-
-  <div class="comment">★ anon: I MISS MYSPACE</div>
-            
-<div class="comment">★ glitchgirl: THIS IS SO COOL</div>
-<div class="comment">★ system: welcome to altspace.</div>
-
-            <div class="comment">  ★ friend1: THIS PROFILE SLAYS
-          </div>
-
-          <div class="comment">
-            ★ friend2: scene never dies
-          </div>
-
-        </div>
-
-      </div>
-
+      <button onclick="saveProfile()">Save Changes</button>
     </div>
   </div>
+
+  <script>
+    function toggleEditor() {
+      document.getElementById("editor").style.display = "block";
+    }
+
+    function saveProfile() {
+      const bio = document.getElementById("bioInput").value;
+      const color = document.getElementById("colorInput").value;
+
+      if (bio) {
+        document.getElementById("bio").innerText = bio;
+        localStorage.setItem("astro_bio", bio);
+      }
+
+      if (color) {
+        document.getElementById("username").style.color = color;
+        localStorage.setItem("astro_color", color);
+      }
+
+      alert("Profile saved 🖤");
+    }
+
+    // Load saved data
+    const savedBio = localStorage.getItem("astro_bio");
+    const savedColor = localStorage.getItem("astro_color");
+
+    if (savedBio) {
+      document.getElementById("bio").innerText = savedBio;
+    }
+
+    if (savedColor) {
+      document.getElementById("username").style.color = savedColor;
+    }
+  </script>
 
 </body>
 </html>

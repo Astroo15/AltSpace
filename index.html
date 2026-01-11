@@ -1,176 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AltSpace</title>
+<meta charset="UTF-8">
+<title>AltSpace</title>
 
-  <style>
-    body {
-      background: black;
-      color: white;
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-    }
+<style>
+body {
+  background:black;
+  color:white;
+  font-family:Arial, Helvetica, sans-serif;
+  margin:0;
+}
 
-    /* NAV */
-    .nav {
-      background: #000;
-      border-bottom: 2px dashed hotpink;
-      padding: 10px;
-      text-align: center;
-    }
+.nav {
+  border-bottom:2px dashed hotpink;
+  padding:10px;
+  text-align:center;
+}
 
-    .nav a {
-      color: cyan;
-      margin: 0 12px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.nav a {
+  color:cyan;
+  margin:0 12px;
+  text-decoration:none;
+  font-weight:bold;
+}
 
-    .nav a:hover {
-      color: hotpink;
-    }
+.hero {
+  text-align:center;
+  padding:40px 20px;
+}
 
-    /* HERO */
-    .hero {
-      text-align: center;
-      padding: 40px 20px;
-    }
+.hero h1 {
+  color:hotpink;
+  font-size:48px;
+}
 
-    .hero h1 {
-      font-size: 48px;
-      color: hotpink;
-      margin-bottom: 10px;
-    }
+.auth {
+  border:2px dashed cyan;
+  padding:20px;
+  max-width:400px;
+  margin:30px auto;
+  text-align:center;
+}
 
-    .hero p {
-      color: #ccc;
-      max-width: 700px;
-      margin: auto;
-      line-height: 1.5;
-    }
+input {
+  width:90%;
+  padding:8px;
+  background:black;
+  border:1px solid cyan;
+  color:white;
+  margin:5px 0;
+}
 
-    /* SECTIONS */
-    .section {
-      border-top: 2px dashed cyan;
-      padding: 30px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    h2 {
-      color: cyan;
-    }
-
-    /* AUTH */
-    .auth {
-      background: #111;
-      padding: 20px;
-      border: 2px dashed hotpink;
-      max-width: 400px;
-      margin: 30px auto;
-      text-align: center;
-    }
-
-    input {
-      width: 90%;
-      padding: 8px;
-      margin: 5px 0;
-      background: black;
-      border: 1px solid cyan;
-      color: white;
-    }
-
-    button {
-      background: hotpink;
-      border: none;
-      padding: 10px 15px;
-      margin: 8px;
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: cyan;
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      color: #666;
-      font-size: 12px;
-      padding: 20px;
-    }
-  </style>
+button {
+  background:hotpink;
+  border:none;
+  padding:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <div class="nav">
-    <a href="index.html">Home</a>
-    <a href="#">Profiles</a>
-    <a href="#">Blog</a>
-    <a href="#">Customize</a>
-  </div>
+<div class="nav">
+  <a href="index.html">Home</a>
+  <a href="astro.html">Profile</a>
+  <a href="blog.html">Blog</a>
+</div>
 
-  <!-- HERO -->
-  <div class="hero">
-    <h1>AltSpace</h1>
-    <p>
-      AltSpace is a digital space for scene, emo, alt, and internet kids.
-      Inspired by early MySpace chaos, glitter GIFs, messy profiles, and being unapologetically yourself.
-    </p>
-  </div>
+<div class="hero">
+  <h1>AltSpace</h1>
+  <p>a scene / alt internet revival 🕸️</p>
+</div>
 
-  <!-- ABOUT -->
-  <div class="section">
-    <h2>What is Scene / Alt?</h2>
-    <p>
-      Scene and alt styles are about expression, emotion, color, contrast, and community.
-      Bright hair next to black eyeliner energy. Cute + aggressive. Loud visuals, honest feelings.
-    </p>
-    <p>
-      AltSpace exists to bring back that energy — profiles you can customize,
-      blogs you actually control, and a place that doesn’t force you to be “clean” or “minimal”.
-    </p>
-  </div>
+<div class="auth">
+  <h3>Login / Sign up</h3>
+  <input id="email" placeholder="email">
+  <input id="password" type="password" placeholder="password">
+  <br><br>
+  <button onclick="signup()">Create account</button>
+  <button onclick="login()">Login</button>
+</div>
 
-  <!-- FEATURES -->
-  <div class="section">
-    <h2>What You Can Do Here</h2>
-    <ul>
-      <li>Create a customizable profile (colors, bio, images)</li>
-      <li>Write blog posts like old-school MySpace</li>
-      <li>Express your aesthetic without filters</li>
-      <li>Exist loudly, quietly, or chaotically</li>
-    </ul>
-  </div>
-
-  <!-- AUTH -->
-  <div class="auth">
-    <h2>Join AltSpace</h2>
-
-    <input id="email" type="email" placeholder="email">
-    <input id="password" type="password" placeholder="password">
-
-    <br><br>
-
-    <button onclick="signup()">Create Account</button>
-    <button onclick="login()">Login</button>
-
-    <p style="font-size:12px;color:#aaa;">
-      Profiles & customization unlock after login
-    </p>
-  </div>
-
-  <footer>
-    AltSpace © chaotic internet revival
-  </footer>
-
-  <!-- JS -->
-  <script type="module" src="app.js"></script>
-
+<script type="module" src="app.js"></script>
 </body>
 </html>

@@ -12,6 +12,30 @@
       marquee { color: hotpink; font-weight: bold; }
           <img src="https://media.tenor.com/Z6gmDPeM6dgAAAAC/glitter.gif"
 style="position:fixed; bottom:10px; right:10px; width:100px;">
+<button onclick="alert('Profile editor coming soon 🖤')">
+  Customize Profile
+</button>
+          <div id="editor" style="display:none;">
+  <h3>Edit Profile</h3>
+
+  <input id="newBio" placeholder="New bio">
+  <br><br>
+  <button onclick="saveProfile()">Save</button>
+</div>
+
+<script>
+  const btn = document.querySelector("button");
+  const editor = document.getElementById("editor");
+
+  btn.onclick = () => {
+    editor.style.display = "block";
+  };
+
+  function saveProfile() {
+    alert("Saving later 😈");
+  }
+</script>
+
 
 
 }

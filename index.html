@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html>
-<head> <script src="app.js"></script>
+<head>
+  <title>AltSpace</title>
+
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+    }
+
+    .nav {
+      text-align: center;
+      padding: 10px;
+      border-bottom: 2px dashed hotpink;
+    }
+
+    .nav a {
+      color: cyan;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    h1 {
+      text-align: center;
+      color: hotpink;
+    }
+  </style>
+</head>
+
+<body>
 
   <div class="nav">
-  <a href="index.html">Home</a> |
-  <a href="astro.html">Astro</a> |
-  <a href="blog.html">Blog</a>
-</div>
+    <a href="index.html">Home</a>
+    <a href="astro.html">Astro</a>
+    <a href="blog.html">Blog</a>
+  </div>
 
-  <meta charset="UTF-8">
-  <title>AltSpace</title>
-  <a href="astro.html">AltSpace 🕸️</a>
-<style>.nav {
-  text-align: center;
-  padding: 10px;
-  border-bottom: 2px dashed hotpink;
-}
-.nav a {
-  color: cyan;
-  margin: 0 10px;
-}
+  <h1>AltSpace 🕸️</h1>
+  <p style="text-align:center;">scene never dies</p>
 
-</head>
-<body style="background:black; color:white; font-family:Arial;">
-
-<h1>AltSpace ✦</h1>
-<p>If you see this, HTML is working.</p>
-
-<a href="astro.html">Go to Astro profile</a>
+  <!-- IMPORTANT: JS MODULE -->
   <script type="module" src="app.js"></script>
-
 
 </body>
 </html>

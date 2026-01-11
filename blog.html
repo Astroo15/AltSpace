@@ -1,26 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AltSpace ✦ Blog</title>
-  <style>
-    body { background:black; color:white; font-family:Arial; }
-    .post { border:2px solid hotpink; margin:20px; padding:10px; }
-    .title { color:cyan; font-size:22px; }
-  </style>
+<meta charset="UTF-8">
+<title>Blog – AltSpace</title>
+
+<style>
+body {
+  background:black;
+  color:white;
+  font-family:Arial;
+}
+.box {
+  border:2px dashed cyan;
+  padding:20px;
+  max-width:700px;
+  margin:20px auto;
+}
+textarea {
+  width:95%;
+  background:black;
+  color:white;
+  border:1px solid hotpink;
+}
+</style>
 </head>
+
 <body>
 
-<a href="index.html">← back</a>
-
-<div class="post">
-  <div class="title">first post</div>
-  altspace is alive. scene is not dead.
+<div class="box">
+  <h2>Blog</h2>
+  <textarea id="post"></textarea><br><br>
+  <button onclick="post()">Post</button>
+  <div id="posts"></div>
 </div>
 
-<div class="post">
-  <div class="title">status</div>
-  coding at 3am hits different.
-</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
+const app = initializeApp({
+  apiKey:"AIzaSyDNLeNACWjr0dr41g_utjpVBdGUpTwCJdg",
+  authDomain:"altspace-25aed.firebaseapp.com",
+  projectId:"altspace-25aed"
+});
+
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+window.post = async () => {
+  await addDoc(collection(db,"posts"), {
+    text: post.value,
+    time: Date.now()
+  });
+  post.value="";
+  load();
+};
+
+async function load() {
+  posts.innerHTML="";
+  const snap = await getDocs(collection(db,"posts"));
+  snap.forEach(d=>{
+    const p=document.createElement("p");
+    p.innerText=d.data().text;
+    posts.appendChild(p);
+  });
+}
+
+onAuthStateChanged(auth,u=>{
+  if(!u) location.href="index.html";
+  load();
+});
+</script>
 </body>
 </html>

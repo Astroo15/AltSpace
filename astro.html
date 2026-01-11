@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Astro ✦ Profile</title>
+
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      color: hotpink;
+      text-decoration: none;
+    }
+
+    .page {
+      width: 900px;
+      margin: auto;
+      border: 3px solid cyan;
+      background: #0b0b0b;
+    }
+
+    .header {
+      text-align: center;
+      font-size: 36px;
+      color: hotpink;
+      padding: 15px;
+      border-bottom: 2px dashed hotpink;
+    }
+
+    .content {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 250px;
+      padding: 10px;
+      border-right: 2px dashed cyan;
+      background: #111;
+    }
+
+    .profile-pic {
+      width: 100%;
+      border: 2px solid hotpink;
+      margin-bottom: 10px;
+      text-align: center;
+      padding: 20px;
+      background: black;
+    }
+
+    .box {
+      border: 2px solid cyan;
+      padding: 8px;
+      margin-bottom: 10px;
+      background: black;
+    }
+
+    .box-title {
+      color: hotpink;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .main {
+      flex: 1;
+      padding: 10px;
+    }
+
+    .comment {
+      border-bottom: 1px dashed #555;
+      padding: 5px 0;
+      font-size: 14px;
+    }
+
+    .blink {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <div class="header">
+      ★ Astro ★
+    </div>
+
+    <div class="content">
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+
+        <div class="profile-pic">
+          PROFILE PIC<br>
+          (add image later)
+        </div>
+
+        <div class="box">
+          <div class="box-title">Status</div>
+          online • scene forever
+        </div>
+
+        <div class="box">
+          <div class="box-title">Links</div>
+          <a href="index.html">Home</a><br>
+          <a href="#">Blog</a><br>
+          <a href="#">Friends</a>
+        </div>
+
+      </div>
+
+      <!-- MAIN PROFILE -->
+      <div class="main">
+
+        <div class="box">
+          <div class="box-title">About Me</div>
+          androgynous chaos.<br>
+          scene kid energy.<br>
+          internet raised.<br>
+          <span class="blink">don’t blink.</span>
+        </div>
+
+        <div class="box">
+          <div class="box-title">Interests</div>
+          music ★ fashion ★ coding ★ neon colors ★
+        </div>
+
+        <div class="box">
+          <div class="box-title">Comments</div>
+
+          <div class="comment">
+            ★ friend1: THIS PROFILE SLAYS
+          </div>
+
+          <div class="comment">
+            ★ friend2: scene never dies
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
